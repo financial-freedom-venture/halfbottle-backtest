@@ -1,13 +1,13 @@
 from datetime import datetime, timedelta
 import json
 from typing import Optional
-from backtest_api.dataservice.options_dataservice import OptionsDataService
-from backtest_api.models.candleStick import CandleStickDataType
+from backend.dataservice.options_dataservice import OptionsDataService
+from backend.models.candleStick import CandleStickDataType
 import multiprocessing
-from backtest_api.models.strategy import SpreadStoplossConditionTypeEnum, StrategyDataType
-from backtest_api.usecases.strategy_helper import checkIfLegStopLossHit, checkIfMTMStopLossHit, checkIfTakeProfitHit, getActiveTickers, getAllTickers, getAtmStrike, getOppositeOrderSide, getOrderData, getTickerName, placeOrder, updateProfitAndLoss
-from backtest_api.models.trade import TradeDataType, TradeOutputEnum, TradeReportDataType, TradeStatusEnum
-from backtest_api.usecases.trailing import checkIfTrailingStopLossHit
+from backend.models.strategy import SpreadStoplossConditionTypeEnum, StrategyDataType
+from backend.usecases.strategy_helper import checkIfLegStopLossHit, checkIfMTMStopLossHit, checkIfTakeProfitHit, getActiveTickers, getAllTickers, getAtmStrike, getOppositeOrderSide, getOrderData, getTickerName, placeOrder, updateProfitAndLoss
+from backend.models.trade import TradeDataType, TradeOutputEnum, TradeReportDataType, TradeStatusEnum
+from backend.usecases.trailing import checkIfTrailingStopLossHit
 from time import time
 
 

@@ -1,7 +1,7 @@
 
 from datetime import datetime
-from backtest_api.dataservice.options_dataservice import OptionsDataService
-from backtest_api.models.candleStick import CandleStickDataType
+from backend.dataservice.options_dataservice import OptionsDataService
+from backend.models.candleStick import CandleStickDataType
 import pandas as pd
 import plotly.graph_objects as go
 

@@ -1,9 +1,9 @@
 from enum import Enum
 from typing import Optional
-from backtest_api.models.baseModel import CustomBaseModel
-from backtest_api.models.order import OrderSideEnum
-from backtest_api.models.trade import TradeDirectionTypeEnum
-from backtest_api.models.trailing import TrailingStopLossDataType
+from backend.models.baseModel import CustomBaseModel
+from backend.models.order import OrderSideEnum
+from backend.models.trade import TradeDirectionTypeEnum
+from backend.models.trailing import TrailingStopLossDataType
 
 
 class DaysInWeekTypeEnum(str, Enum):

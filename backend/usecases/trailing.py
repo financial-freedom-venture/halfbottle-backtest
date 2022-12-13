@@ -1,6 +1,6 @@
-from backtest_api.models.candleStick import CandleStickDataType
-from backtest_api.models.strategy import StrategyDataType, ExitConditionDataSourceEnum
-from backtest_api.models.trade import TradeDataType
+from backend.models.candleStick import CandleStickDataType
+from backend.models.strategy import StrategyDataType, ExitConditionDataSourceEnum
+from backend.models.trade import TradeDataType
 
 
 def checkIfTrailingStopLossHit(tradeData: TradeDataType, strategy: StrategyDataType) -> bool:

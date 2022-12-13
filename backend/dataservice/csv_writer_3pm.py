@@ -1,5 +1,5 @@
-from backtest_api.models.strategy import StrategyDataType
-from backtest_api.models.trade import TradeReportDataType
+from backend.models.strategy import StrategyDataType
+from backend.models.trade import TradeReportDataType
 import os.path
 import csv
 
@@ -62,5 +62,6 @@ def __appendCsvRows(filename: str, row: list):
         print(f'\n\n----------------- Error ------------------')
         print(f'\t file with filename- {filename} don\'t exist')
     return
+
 
 def generateExcel

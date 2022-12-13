@@ -1,10 +1,10 @@
 from datetime import datetime
 from fastapi import APIRouter, Depends, Query, Request, HTTPException
 
-from backtest_api.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
-from backtest_api.dataservice.options_dataservice import OptionsDataService
-from backtest_api.models.strategy import StrategyDataType
-from backtest_api.usecases.strategy_tester import StrategyBackTester
+from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
+from backend.dataservice.options_dataservice import OptionsDataService
+from backend.models.strategy import StrategyDataType
+from backend.usecases.strategy_tester import StrategyBackTester
 
 
 router = APIRouter()

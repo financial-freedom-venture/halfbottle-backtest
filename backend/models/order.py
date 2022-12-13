@@ -1,6 +1,6 @@
 from typing import Optional
 from enum import Enum
-from backtest_api.models.baseModel import CustomBaseModel
+from backend.models.baseModel import CustomBaseModel
 
 
 class OrderSideEnum(str, Enum):

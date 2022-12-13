@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Union
-from backtest_api.models.baseModel import CustomBaseModel
-from backtest_api.models.order import OrderDataType, OrderSideEnum
+from backend.models.baseModel import CustomBaseModel
+from backend.models.order import OrderDataType, OrderSideEnum
 
 
 class TradeSpreadEntryDataType(CustomBaseModel):

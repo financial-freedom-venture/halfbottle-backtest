@@ -1,4 +1,4 @@
-from backtest_api.models.baseModel import CustomBaseModel
+from backend.models.baseModel import CustomBaseModel
 
 
 class TrailingStopLossDataType(CustomBaseModel):

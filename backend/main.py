@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backtest_api.delivery import intradayBacktester
+from backend.delivery import intradayBacktester
 from fastapi.middleware.cors import CORSMiddleware
 
 

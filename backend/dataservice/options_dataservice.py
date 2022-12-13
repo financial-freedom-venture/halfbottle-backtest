@@ -3,7 +3,7 @@ import csv
 from datetime import datetime
 import os
 from time import time
-from backtest_api.models.candleStick import CandleStickDataType
+from backend.models.candleStick import CandleStickDataType
 
 
 DATA_PATH = "./data/weekly_data/"

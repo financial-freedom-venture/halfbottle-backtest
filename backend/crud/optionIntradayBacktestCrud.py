@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Optional
-from backtest_api.models.strategy import StrategyDataType
-from backtest_api.models.trade import TradeDataType
-from backtest_api.usecases.strategy_tester import StrategyBackTester
+from backend.models.strategy import StrategyDataType
+from backend.models.trade import TradeDataType
+from backend.usecases.strategy_tester import StrategyBackTester
 
 
 class IntradayBackTesterCrud:
