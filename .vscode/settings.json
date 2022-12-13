@@ -1,0 +1,19 @@
+{
+  "cSpell.words": [
+    "Usecase",
+    "ohlc",
+    "TIMEFRAME",
+    "Dataservice",
+    "Datastore",
+    "BHAVCOPY",
+    "pydantic",
+    "stoploss",
+    "BACKTESTING",
+    "Moneycontrol",
+    "Backtester",
+    "longterm"
+  ],
+  "files.exclude": {
+    "**/__pycache__": true
+  }
+}
