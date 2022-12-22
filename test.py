@@ -48,6 +48,17 @@ strategyJson = {
     }
 }
 
+URL = "https://backtest.halfbottle.in/intraday/"
+
+params = {
+    "day_date": 1,
+    "day_month": 1,
+    "day_year": 2020,
+    "requestData": strategyJson
+}
+
+requests.get
+
 strategy = StrategyDataType(**strategyJson)
 
 optionsDatastore = HistoricalDataService("http://localhost:7001/")
