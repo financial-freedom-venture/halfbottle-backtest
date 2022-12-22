@@ -49,11 +49,11 @@ strategyJson = {
     }
 }
 
-URL = "http://localhost:8001/intraday/"
+URL = "http://backtest.halfbottle.in/intraday/"
 PARAMS = {
-    "day_day": 1,
-    "day_month": 1,
-    "day_year": 2020
+    "date_day": 1,
+    "date_month": 1,
+    "date_year": 2020
 }
 BODY = strategyJson
 

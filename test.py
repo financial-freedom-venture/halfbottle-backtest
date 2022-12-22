@@ -57,8 +57,6 @@ params = {
     "requestData": strategyJson
 }
 
-requests.get
-
 strategy = StrategyDataType(**strategyJson)
 
 optionsDatastore = HistoricalDataService("http://localhost:7001/")
