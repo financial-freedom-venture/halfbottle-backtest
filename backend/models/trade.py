@@ -15,7 +15,9 @@ class TradeDirectionTypeEnum(str, Enum):
 
 
 class TradeStatusEnum(str, Enum):
+    SEARCHING = "searching"
     ENTERED = "entered"
+    PARTIAL_EXIT = "partial_exit"
     EXITED = "exited"
 
 

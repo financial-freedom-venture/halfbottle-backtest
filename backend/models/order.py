@@ -42,7 +42,7 @@ class OrderSideEnum(str, Enum):
     SELL = "sell"
     INVALID = "invalid"
 
-    def getOppositeSide(self):
+    def getOppositeSide(self) -> OrderSideEnum:
         if self.value == self.BUY:
             return self.SELL
         if self.value == self.SELL:
@@ -76,3 +76,4 @@ class OrderDataType(CustomBaseModel):
     fee: float
     blocked_margin: float
     transaction_time: int
+    hedge_order: bool

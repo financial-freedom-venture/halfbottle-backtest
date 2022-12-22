@@ -1,14 +1,14 @@
 
 from datetime import datetime
-from backend.dataservice.options_dataservice import OptionsDataService
+from backend.dataservice.historical_dataservice import HistoricalDataService
 from backend.models.candleStick import CandleStickDataType
 import pandas as pd
 import plotly.graph_objects as go
 
 
-def draw_option_chart_by_strike(optionsDataService: OptionsDataService, date: datetime, ticker: str, strike: int, contract_type: str):
-    dailyData = optionsDataService.getDailyData(date)
-    filteredData = optionsDataService.filterDailyData(
+def draw_option_chart_by_strike(HistoricalDataService: HistoricalDataService, date: datetime, ticker: str, strike: int, contract_type: str):
+    dailyData = HistoricalDataService.getDailyData(date)
+    filteredData = HistoricalDataService.filterDailyData(
         dailyData, [ticker+"wk"+str(int(strike))+contract_type.lower()])
     if len(filteredData) == 0:
         print("No Data Found")
@@ -19,9 +19,9 @@ def draw_option_chart_by_strike(optionsDataService: OptionsDataService, date: da
     return
 
 
-def draw_option_chart_by_ticker(optionsDataService: OptionsDataService, date: datetime, ticker: str):
-    dailyData = optionsDataService.getDailyData(date)
-    filteredData = optionsDataService.filterDailyData(dailyData, [ticker])
+def draw_option_chart_by_ticker(HistoricalDataService: HistoricalDataService, date: datetime, ticker: str):
+    dailyData = HistoricalDataService.getDailyData(date)
+    filteredData = HistoricalDataService.filterDailyData(dailyData, [ticker])
     if len(filteredData) == 0:
         print("No Data Found")
         return

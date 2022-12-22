@@ -1,6 +1,7 @@
 from enum import Enum
-from typing import Optional
+from typing import Optional, Union
 from backend.models.baseModel import CustomBaseModel
+from backend.models.candleStick import ContractTypeEnum, ExpiryTypeEnum
 from backend.models.order import OrderSideEnum
 from backend.models.trade import TradeDirectionTypeEnum
 from backend.models.trailing import TrailingStopLossDataType
@@ -19,12 +20,22 @@ class ExitConditionDataSourceEnum(str, Enum):
     PNL_POINTS = "pnl_points"
 
 
+class SpreadStrikeTypeEnum(str, Enum):
+    ATM_AND_STRIKE_POINTS = "ATM_AND_STRIKE_POINTS"
+
+
+class SpreadStrikeDataType(CustomBaseModel):
+    strike_type: SpreadStrikeTypeEnum
+    value: Union[str, float]
+
+
 class SpreadOrderDataType(CustomBaseModel):
-    strike: str
+    # currently strike = ATM+0
+    strike: SpreadStrikeDataType
     order_side: OrderSideEnum
-    contract_type: str
+    contract_type: ContractTypeEnum
     stoploss_percent: float = -1
-    hedge_strike: str = ""
+    hedge_strike: Optional[SpreadStrikeDataType] = None
 
 
 class SpreadStoplossConditionTypeEnum(str, Enum):
@@ -55,6 +66,7 @@ class StrategyExitDataType(CustomBaseModel):
 
 class StrategyDataType(CustomBaseModel):
     ticker: str
+    expiry: ExpiryTypeEnum
     spread: SpreadDataType
     entry: StrategyEntryDataType
     exit: StrategyExitDataType

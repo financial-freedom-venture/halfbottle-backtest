@@ -1,8 +1,7 @@
 from datetime import datetime
 from fastapi import APIRouter, Depends, Query, Request, HTTPException
-
 from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
-from backend.dataservice.options_dataservice import OptionsDataService
+from backend.dataservice.historical_dataservice import HistoricalDataService
 from backend.models.strategy import StrategyDataType
 from backend.usecases.strategy_tester import StrategyBackTester
 
@@ -19,7 +18,7 @@ def getSympaiMapping(
     date: str,
     requestData: StrategyDataType,
 ):
-    optionsDatastore = OptionsDataService()
+    optionsDatastore = HistoricalDataService()
     strategyBacktestingService = StrategyBackTester(optionsDatastore)
     crud = IntradayBackTesterCrud(strategyBacktestingService)
 

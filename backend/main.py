@@ -18,7 +18,7 @@ app.add_middleware(
 
 app.include_router(
     intradayBacktester.router,
-    prefix="/backtester/intraday",
+    prefix="/intraday",
     tags=["intraday backtester"],
 )
 
