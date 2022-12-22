@@ -13,24 +13,17 @@
       "justMyCode": true
     },
     {
-      "name": "Python: Data FastAPI",
-      "type": "python",
-      "request": "launch",
-      "module": "uvicorn",
-      "args": ["data_api.main:app", "--reload", "--port", "7000"]
-    },
-    {
       "name": "Python: Backtest FastAPI",
       "type": "python",
       "request": "launch",
       "module": "uvicorn",
       "args": [
-        "backtest_api.main:app",
+        "backend.main:app",
         "--host",
         "0.0.0.0",
         "--reload",
         "--port",
-        "3001"
+        "8001"
       ]
     }
   ]
