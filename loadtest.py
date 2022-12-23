@@ -4,7 +4,7 @@ import requests
 import time
 
 MAX_THREADS = 1
-TOTAL_REQUEST = 6
+TOTAL_REQUEST = 1
 
 
 strategyJson = {

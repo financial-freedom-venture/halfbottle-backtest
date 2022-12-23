@@ -147,8 +147,6 @@ class CsvDataStore:
                 error_code=ErrorCodeEnum.NO_DATA,
                 message=f"CsvDataStore: Options Data Not Found Ticker - {ticker}, expiry_type - {expiry_type}, expiry - {formattedExpiryDate}, contract_type - {contract_type}, Date - {formattedDate}"
             )
-        print(
-            f'Expiry for ticker - {ticker}, expiry_type - {expiry_type}, date - {date.isoformat()} is -> {expiry.isoformat()}')
 
         formattedExpiryDate = str(int(expiry.isoformat().split("T")[0].split("-")[0])) + "-" + str(int(expiry.isoformat(
         ).split("T")[0].split("-")[1])) + "-" + str(int(expiry.isoformat().split("T")[0].split("-")[2]))

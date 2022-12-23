@@ -34,7 +34,6 @@ def enterTrade(historicalDataService: HistoricalDataService, timestamp: int, str
         seconds=int(strategy.exit.time.strip().split(":")[2]) if len(
             strategy.entry.time.strip().split(":")) == 3 else 0
     )
-    print(entryDatetime.timestamp())
     if entryDatetime > currentDatetime or currentDatetime > exitDatetime:
         return candleStickData, None
 
