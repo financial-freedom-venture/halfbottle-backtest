@@ -1,14 +1,16 @@
 from functools import lru_cache
 from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
+from backend.dataservice.historicalOhlcDataService import HistoricalOhlcDataService
 from backend.dataservice.historical_dataservice import HistoricalDataService
 from backend.usecases.strategy_tester import StrategyBackTester
-from ..models import setting
+from ..model import setting
 
 
 def getIntradayBacktestCrud() -> IntradayBackTesterCrud:
     settings = get_settings()
     historicalDataService = HistoricalDataService(settings.DATA_URL)
-    strategyTester = StrategyBackTester(historicalDataService)
+    cashDataService = HistoricalOhlcDataService("./data/")
+    strategyTester = StrategyBackTester(cashDataService)
     crud = IntradayBackTesterCrud(strategyTester)
     return crud
 

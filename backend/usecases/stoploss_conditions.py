@@ -1,8 +1,8 @@
 
-from backend.models.candleStick import CandleStickDataType
-from backend.models.order import OrderDataType, OrderSideEnum
-from backend.models.strategy import ExitConditionDataSourceEnum, SpreadStoplossConditionTypeEnum, StrategyDataType
-from backend.models.trade import TradeDataType, TradeDirectionTypeEnum
+from backend.model.candleStick import CandleStickDataType
+from backend.model.order import OrderDataType, OrderSideEnum
+from backend.model.strategy import ExitConditionDataSourceEnum, SpreadStoplossConditionTypeEnum, StrategyDataType
+from backend.model.trade import TradeDataType, TradeDirectionTypeEnum
 from backend.usecases.order_helper import processExitLeg, processRemainingExitLegs
 from backend.usecases.strategy_helper import getActiveTickers, getOrderData
 from backend.usecases.trailing import checkIfTrailingStopLossHit

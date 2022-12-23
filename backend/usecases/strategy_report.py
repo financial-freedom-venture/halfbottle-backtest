@@ -1,4 +1,4 @@
-from backend.models.trade import TradeDataType, TradeOutputEnum, TradeReportDataType
+from backend.model.trade import TradeDataType, TradeOutputEnum, TradeReportDataType
 
 
 def generateTradeReport(tradesData: list[TradeDataType]) -> TradeReportDataType:

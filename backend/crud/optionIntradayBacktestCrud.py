@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
-from backend.models.strategy import StrategyDataType
-from backend.models.trade import TradeDataType
+from backend.model.strategy import StrategyDataType
+from backend.model.trade import TradeDataType
 from backend.usecases.strategy_tester import StrategyBackTester
 
 

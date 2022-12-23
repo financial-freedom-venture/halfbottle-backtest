@@ -1,6 +1,6 @@
 
 
-from backend.models.strategy import SpreadOrderDataType, SpreadStrikeDataType
+from backend.model.strategy import SpreadOrderDataType, SpreadStrikeDataType
 
 
 def getSpreadOrderStrike(ticker: str, underlying_value: float, strike: SpreadStrikeDataType) -> int:

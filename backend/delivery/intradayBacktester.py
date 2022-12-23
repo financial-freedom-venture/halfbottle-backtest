@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, Query, Request, HTTPException
 from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
 from backend.dataservice.historical_dataservice import HistoricalDataService
 from backend.dependency.dependency import getIntradayBacktestCrud
-from backend.models.strategy import StrategyDataType
+from backend.model.strategy import StrategyDataType
 from backend.usecases.strategy_tester import StrategyBackTester
 
 
@@ -37,7 +37,7 @@ def getIntradayTest(
 
     if data == None:
         raise HTTPException(
-            status_code=403, detail="Data not available on this date"
+            status_code=403, detail="Data not available on this date or No Entry Available"
         )
 
     return data.dict()

@@ -1,10 +1,10 @@
 
 
 from typing import Optional, Tuple
-from backend.models.candleStick import CandleStickDataType
-from backend.models.order import OrderDataType, OrderSideEnum
-from backend.models.strategy import ExitConditionDataSourceEnum, StrategyDataType
-from backend.models.trade import PnlDataType, TradeDataType, TradeDirectionTypeEnum, TradeOutputEnum, TradeStatusEnum
+from backend.model.candleStick import CandleStickDataType
+from backend.model.order import OrderDataType, OrderSideEnum
+from backend.model.strategy import ExitConditionDataSourceEnum, StrategyDataType
+from backend.model.trade import PnlDataType, TradeDataType, TradeDirectionTypeEnum, TradeOutputEnum, TradeStatusEnum
 from datetime import datetime
 import pandas as pd
 import plotly.express as px

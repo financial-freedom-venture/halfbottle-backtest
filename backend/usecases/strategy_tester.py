@@ -1,11 +1,12 @@
 from datetime import datetime
 import json
-from typing import Optional
+from typing import Optional, Union
+from backend.dataservice.historicalOhlcDataService import HistoricalOhlcDataService
 from backend.dataservice.historical_dataservice import HistoricalDataService
-from backend.models.candleStick import CandleStickDictDataType
-from backend.models.strategy import StrategyDataType
+from backend.model.candleStick import CandleStickDictDataType
+from backend.model.strategy import StrategyDataType
 from backend.usecases.strategy_executer import enterTrade, exitTrade
-from backend.models.trade import TradeDataType, TradeStatusEnum
+from backend.model.trade import TradeDataType, TradeStatusEnum
 from backend.utils.candleUtils import convertFastAccessData
 from backend.utils.strategyUtil import getSpreadOrderStrike
 
@@ -15,7 +16,7 @@ DATA_PATH = "./strategy/"
 
 class StrategyBackTester:
 
-    def __init__(self, historicalDataService: HistoricalDataService) -> None:
+    def __init__(self, historicalDataService: Union[HistoricalDataService, HistoricalOhlcDataService]) -> None:
         self.historicalDataService = historicalDataService
         return
 

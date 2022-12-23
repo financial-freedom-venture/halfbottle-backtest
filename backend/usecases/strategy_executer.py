@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 from typing import Optional, Tuple
 from backend.dataservice.historical_dataservice import HistoricalDataService
-from backend.models.candleStick import CandleStickDictDataType, CandleStickListDataType, ContractTypeEnum, ExpiryTypeEnum
-from backend.models.strategy import StrategyDataType
-from backend.models.trade import TradeDataType, TradeOutputEnum, TradeStatusEnum
+from backend.model.candleStick import CandleStickDictDataType, CandleStickListDataType, ContractTypeEnum, ExpiryTypeEnum
+from backend.model.strategy import StrategyDataType
+from backend.model.trade import TradeDataType, TradeOutputEnum, TradeStatusEnum
 from backend.usecases.order_helper import placeEntryOrders, processRemainingExitLegs
 from backend.usecases.stoploss_conditions import checkIfTakeProfitHit, processStoplossHit
 from backend.usecases.strategy_helper import getActiveTickers, updateProfitAndLoss
@@ -34,6 +34,7 @@ def enterTrade(historicalDataService: HistoricalDataService, timestamp: int, str
         seconds=int(strategy.exit.time.strip().split(":")[2]) if len(
             strategy.entry.time.strip().split(":")) == 3 else 0
     )
+    print(entryDatetime.timestamp())
     if entryDatetime > currentDatetime or currentDatetime > exitDatetime:
         return candleStickData, None
 
@@ -45,23 +46,29 @@ def enterTrade(historicalDataService: HistoricalDataService, timestamp: int, str
         strike = getSpreadOrderStrike(
             strategy.ticker, candleStickData[strategy.ticker].data[timestamp].open, order.strike)
 
-        thread = threading.Thread(target=fetchDataMultithread, args=(
-            historicalDataService, strategy.ticker, strike, strategy.expiry, order.contract_type, datetime.fromtimestamp(timestamp), output,))
-        threadPool.append(thread)
-        thread.start()
+        # thread = threading.Thread(target=fetchDataMultithread, args=(
+        #     historicalDataService, strategy.ticker, strike, strategy.expiry, order.contract_type, datetime.fromtimestamp(timestamp), output,))
+        # threadPool.append(thread)
+        # thread.start()
+
+        fetchDataMultithread(
+            historicalDataService, strategy.ticker, strike, strategy.expiry, order.contract_type, datetime.fromtimestamp(timestamp), output)
 
         if order.hedge_strike != None:
             hedge_strike = getSpreadOrderStrike(
                 strategy.ticker, candleStickData[strategy.ticker].data[timestamp].open, order.hedge_strike)
 
-            thread = threading.Thread(target=fetchDataMultithread, args=(
-                historicalDataService, strategy.ticker, hedge_strike, strategy.expiry, order.contract_type, datetime.fromtimestamp(timestamp), output,))
-            threadPool.append(thread)
-            thread.start()
+            # thread = threading.Thread(target=fetchDataMultithread, args=(
+            #     historicalDataService, strategy.ticker, hedge_strike, strategy.expiry, order.contract_type, datetime.fromtimestamp(timestamp), output,))
+            # threadPool.append(thread)
+            # thread.start()
 
-    while len(threadPool) != 0:
-        thread = threadPool.pop()
-        thread.join()
+            fetchDataMultithread(
+                historicalDataService, strategy.ticker, hedge_strike, strategy.expiry, order.contract_type, datetime.fromtimestamp(timestamp), output)
+
+    # while len(threadPool) != 0:
+    #     thread = threadPool.pop()
+    #     thread.join()
 
     for entry in output:
         tempCandleData[str(entry.data[0].strike) +

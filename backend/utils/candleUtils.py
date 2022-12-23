@@ -1,5 +1,5 @@
 
-from backend.models.candleStick import CandleStickDataType, CandleStickDictDataType, CandleStickListDataType
+from backend.model.candleStick import CandleStickDataType, CandleStickDictDataType, CandleStickListDataType
 
 
 def convertFastAccessData(slowCandleData: dict[str, CandleStickListDataType]) -> dict[str, CandleStickDictDataType]:

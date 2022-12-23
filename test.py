@@ -2,7 +2,7 @@
 from datetime import datetime
 from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
 from backend.dataservice.historical_dataservice import HistoricalDataService
-from backend.models.strategy import StrategyDataType
+from backend.model.strategy import StrategyDataType
 from backend.usecases.strategy_tester import StrategyBackTester
 
 
