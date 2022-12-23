@@ -3,8 +3,8 @@ import threading
 import requests
 import time
 
-MAX_THREADS = 1
-TOTAL_REQUEST = 1
+MAX_THREADS = 3
+TOTAL_REQUEST = 6
 
 
 strategyJson = {
@@ -49,7 +49,7 @@ strategyJson = {
     }
 }
 
-URL = "http://backtest.halfbottle.in/intraday/"
+URL = "http://localhost:8001/intraday/"
 PARAMS = {
     "date_day": 1,
     "date_month": 1,
