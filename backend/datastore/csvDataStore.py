@@ -6,6 +6,8 @@ from backend.model.error import ErrorCodeEnum, ErrorResponse
 import pandas as pd
 from pathlib import Path
 
+from backend.model.singleton import Singleton
+
 
 class AvailableOptionsExpiryData(CustomBaseModel):
     weekly_expiry_data: dict[datetime, dict[datetime, list[str]]]
@@ -17,7 +19,7 @@ class AvailableCsvData(CustomBaseModel):
     options: dict[str, AvailableOptionsExpiryData]
 
 
-class CsvDataStore:
+class CsvDataStore(metaclass=Singleton):
     def __init__(self, data_path: str) -> None:
         self.DATA_PATH = data_path
         self.availableData = self.__generateAvailableData(data_path)

@@ -10,18 +10,21 @@ import pandas as pd
 import plotly.express as px
 
 
-def getActiveTickers(tradeData: TradeDataType):
+def getActiveTickers(tradeData: Optional[TradeDataType]):
+    if tradeData == None:
+        return []
+
     orderBook = {}
-    for order in tradeData.entry_orders:
+    for order in tradeData.entry_orders + tradeData.exit_orders:
         if order.ticker in orderBook.keys():
             orderBook[order.ticker] = orderBook[order.ticker] + \
                 order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
         else:
             orderBook[order.ticker] = order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
 
-    for order in tradeData.exit_orders:
-        orderBook[order.ticker] = orderBook[order.ticker] - \
-            order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
+    # for order in tradeData.exit_orders:
+    #     orderBook[order.ticker] = orderBook[order.ticker] - \
+    #         order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
 
     activeTickers = []
     for ticker in orderBook.keys():

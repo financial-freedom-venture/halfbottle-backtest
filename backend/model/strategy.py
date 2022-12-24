@@ -40,12 +40,12 @@ class SpreadOrderDataType(CustomBaseModel):
 
 class SpreadStoplossConditionTypeEnum(str, Enum):
     EXIT_ALL_LEG = "exit_all_leg"
-    EXIT_ONE_LEG = "exit_one_leg"
+    PARTIAL_EXIT = "exit_one_leg"
 
 
 class SpreadDataType(CustomBaseModel):
     spread_name: str = ""
-    stoploss_condition: SpreadStoplossConditionTypeEnum = SpreadStoplossConditionTypeEnum.EXIT_ONE_LEG
+    stoploss_condition: SpreadStoplossConditionTypeEnum = SpreadStoplossConditionTypeEnum.PARTIAL_EXIT
     order: list[SpreadOrderDataType]
 
 

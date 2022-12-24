@@ -2,7 +2,7 @@ from functools import lru_cache
 from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
 from backend.dataservice.historicalOhlcDataService import HistoricalOhlcDataService
 from backend.dataservice.historical_dataservice import HistoricalDataService
-from backend.usecases.strategy_tester import StrategyBackTester
+from backend.usecase.strategy_tester import StrategyBackTester
 from ..model import setting
 
 

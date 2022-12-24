@@ -16,7 +16,8 @@ def checkExitCondition(tradeData: TradeDataType, timestamp: int, strategy: Strat
     )
 
     # no need to check exit condition if no trade entered
-    if tradeData == None:
+    activeTickers = getActiveTickers(tradeData)
+    if len(activeTickers) == 0:
         return output
 
     underlyingCandleData = candleStickData[strategy.ticker]
@@ -26,7 +27,6 @@ def checkExitCondition(tradeData: TradeDataType, timestamp: int, strategy: Strat
         output.exit_type = TradeExitTypeEnum.COMPLETE_EXIT
         return output
 
-    activeTickers = getActiveTickers(tradeData)
     # exit condition when stoploss hits
     for spreadOrder in strategy.spread.order:
         tempTicker = str(getSpreadOrderStrike(
