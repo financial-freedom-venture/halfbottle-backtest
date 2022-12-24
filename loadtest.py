@@ -3,7 +3,7 @@ import threading
 import requests
 import time
 
-MAX_THREADS = 1
+MAX_THREADS = 120
 
 START_DATE = datetime(2020, 1, 1)
 END_DATE = datetime(2020, 12, 31)
@@ -51,17 +51,17 @@ strategyJson = {
 }
 
 total_days = (END_DATE - START_DATE).days + 1
+if total_days < MAX_THREADS:
+    MAX_THREADS = total_days
+
 DAYS_PER_THREAD = int(total_days/MAX_THREADS)
+
 
 URL = "http://localhost:8001/intraday/"
 BODY = strategyJson
 
 
-def getRequest(index: int, output: list):
-    start_date = START_DATE + timedelta(days=index * DAYS_PER_THREAD)
-    end_date = START_DATE + \
-        timedelta(days=(index + 1) * DAYS_PER_THREAD -
-                  1) if index != MAX_THREADS - 1 else END_DATE
+def getRequest(start_date: datetime, end_date: datetime, output: list):
     params = {
         "start_date_day": start_date.day,
         "start_date_month": start_date.month,
@@ -89,11 +89,19 @@ start = time.time()
 output = []
 index = 0
 threadPool: list[threading.Thread] = []
+currentDate = START_DATE
+total_days_left = total_days
 while index < MAX_THREADS:
-    process = threading.Thread(target=getRequest, args=(index, output,))
+    days_per_thread = int(total_days_left/(MAX_THREADS - index))
+    end_date = currentDate + \
+        timedelta(days=days_per_thread)
+    process = threading.Thread(
+        target=getRequest, args=(currentDate, end_date, output,))
     threadPool.append(process)
     process.start()
     index = index + 1
+    total_days_left = total_days_left - days_per_thread
+    currentDate = end_date + timedelta(days=1)
 
 while len(threadPool) != 0:
     thread = threadPool.pop()
@@ -105,9 +113,17 @@ end = time.time()
 total_failed = 0
 average_time = 0.0
 max_time = 0
+tradeOutput = {}
 for entry in output:
     if entry["status_code"] != 200:
         total_failed = total_failed + 1
+        continue
+
+    for key in entry["data"].keys():
+        if key in tradeOutput.keys():
+            tradeOutput[key] = tradeOutput[key] + entry["data"][key]
+        else:
+            tradeOutput[key] = entry["data"][key]
 
     average_time = average_time + entry["time"]/MAX_THREADS
 
@@ -117,11 +133,18 @@ for entry in output:
 print("")
 print("")
 print("")
-print("----------------  Report  -----------------")
+print("---------------- Timing Report  -----------------")
 print(f'# Total Failed Percent - {total_failed*100/MAX_THREADS}')
 print(f'# Average Request Time - {average_time} ms')
 print(f'# Max Request Time - {max_time} ms')
 print(f'# Total Time - {end - start} seconds')
 
+print()
+print()
+
+print("---------------- Trade Report  -----------------")
+print(tradeOutput)
+print()
+print()
 
 print("done")

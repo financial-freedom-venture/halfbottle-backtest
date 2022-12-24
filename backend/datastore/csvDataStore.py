@@ -147,7 +147,7 @@ class CsvDataStore(metaclass=Singleton):
         if expiry == None:
             return None, ErrorResponse(
                 error_code=ErrorCodeEnum.NO_DATA,
-                message=f"CsvDataStore: Options Data Not Found Ticker - {ticker}, expiry_type - {expiry_type}, expiry - {formattedExpiryDate}, contract_type - {contract_type}, Date - {formattedDate}"
+                message=f"CsvDataStore: Options Data Not Found Ticker - {ticker}, expiry_type - {expiry_type}, contract_type - {contract_type}, Date - {date.isoformat()}"
             )
 
         formattedExpiryDate = str(int(expiry.isoformat().split("T")[0].split("-")[0])) + "-" + str(int(expiry.isoformat(
@@ -168,11 +168,11 @@ class CsvDataStore(metaclass=Singleton):
             return df, None
         except Exception as e:
             print(
-                f"CsvDataStore: Options Data Not Found Ticker - {ticker}, expiry_type - {expiry_type}, expiry - {formattedExpiryDate}, contract_type - {contract_type}, Date - {formattedDate}")
+                f"CsvDataStore: Options Data Not Found Ticker - {ticker}, expiry_type - {expiry_type},, contract_type - {contract_type}, Date - {date.isoformat()}")
             print(e)
             return None, ErrorResponse(
                 error_code=ErrorCodeEnum.NO_DATA,
-                message=f"CsvDataStore: Options Data Not Found Ticker - {ticker}, expiry_type - {expiry_type}, expiry - {formattedExpiryDate}, contract_type - {contract_type}, Date - {formattedDate}"
+                message=f"CsvDataStore: Options Data Not Found Ticker - {ticker}, expiry_type - {expiry_type}, , contract_type - {contract_type}, Date - {date.isoformat()}"
             )
 
     def getExpiryDate(self, ticker: str, expiry_type: ExpiryTypeEnum, date: datetime) -> Optional[datetime]:
