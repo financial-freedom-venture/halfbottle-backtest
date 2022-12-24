@@ -5,12 +5,12 @@ from backend.model.candleStick import CandleStickDataType, CandleStickDictDataTy
 from backend.model.order import OrderDataType, OrderSideEnum, OrderStatusType, OrderTypeEnum
 from backend.model.strategy import SpreadOrderDataType, SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
 from backend.model.trade import TradeDataType
-from backend.usecases.strategy_helper import getActiveTickers, updateProfitAndLoss
+from backend.usecase.strategy_helper import getActiveTickers, updateProfitAndLoss
 from backend.utils.strategyUtil import getLotSize, getSpreadOrderStrike
 
 
-def placeEntryOrders(timestamp: int, strategy: StrategyDataType, candleStickData: dict[str, CandleStickDictDataType]) -> Tuple[int, list[OrderDataType]]:
-    underlyingCandle = candleStickData[strategy.ticker.upper()].data[timestamp]
+def placeEntryOrders(timestamp: int, strategy: StrategyDataType, candleStickData: dict[str, CandleStickDataType]) -> Tuple[int, list[OrderDataType]]:
+    underlyingCandle = candleStickData[strategy.ticker.upper()]
     atm_strike = getSpreadOrderStrike(
         strategy.ticker, underlyingCandle.open, SpreadStrikeDataType(strike_type=SpreadStrikeTypeEnum.ATM_AND_STRIKE_POINTS, value="ATM+0"))
 
@@ -19,7 +19,7 @@ def placeEntryOrders(timestamp: int, strategy: StrategyDataType, candleStickData
         strike = getSpreadOrderStrike(
             strategy.ticker, underlyingCandle.open, order.strike)
         strikeCandle = candleStickData[str(
-            strike) + order.contract_type].data[timestamp]
+            strike) + order.contract_type]
         orders.append(
             placeOrder(str(strike) + order.contract_type, strikeCandle.open,
                        order.order_side, getLotSize(strategy.ticker), order.stoploss_percent, timestamp)
@@ -29,7 +29,7 @@ def placeEntryOrders(timestamp: int, strategy: StrategyDataType, candleStickData
             hedgeStrike = getSpreadOrderStrike(
                 strategy.ticker, underlyingCandle.open, order.hedge_strike)
             hedgeStrikeCandle = candleStickData[str(
-                strike) + order.contract_type].data[timestamp]
+                strike) + order.contract_type]
             orders.append(
                 placeOrder(str(hedgeStrike) + order.contract_type, hedgeStrikeCandle.open,
                            order.order_side.getOppositeSide(), getLotSize(strategy.ticker), order.stoploss_percent, timestamp, True)
@@ -62,7 +62,7 @@ def processExitLeg(spreadOrder: SpreadOrderDataType, tradeData: TradeDataType, s
     underlyingCandle = candleStickData[strategy.ticker.upper()]
 
     strike = getSpreadOrderStrike(
-        strategy.ticker, underlyingCandle.open, spreadOrder.strike)
+        strategy.ticker, tradeData.underlying_data[0], spreadOrder.strike)
     strikeCandle = candleStickData[str(
         strike) + spreadOrder.contract_type]
     tradeData.exit_orders.append(
@@ -72,13 +72,14 @@ def processExitLeg(spreadOrder: SpreadOrderDataType, tradeData: TradeDataType, s
 
     if spreadOrder.hedge_strike != None:
         hedgeStrike = getSpreadOrderStrike(
-            strategy.ticker, underlyingCandle.open, spreadOrder.hedge_strike)
+            strategy.ticker, tradeData.underlying_data[0], spreadOrder.hedge_strike)
         hedgeStrikeCandle = candleStickData[str(
             strike) + spreadOrder.contract_type]
         tradeData.exit_orders.append(
             placeOrder(str(hedgeStrike) + spreadOrder.contract_type, hedgeStrikeCandle.open,
                        spreadOrder.order_side, getLotSize(strategy.ticker), spreadOrder.stoploss_percent, underlyingCandle.timestamp, True)
         )
+
     return tradeData
 
 

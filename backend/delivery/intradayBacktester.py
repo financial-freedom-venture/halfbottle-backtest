@@ -5,7 +5,7 @@ from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
 from backend.dataservice.historical_dataservice import HistoricalDataService
 from backend.dependency.dependency import getIntradayBacktestCrud
 from backend.model.strategy import StrategyDataType
-from backend.usecases.strategy_tester import StrategyBackTester
+from backend.usecase.strategy_tester import StrategyBackTester
 
 
 router = APIRouter()
@@ -17,14 +17,19 @@ router = APIRouter()
 @router.post("/", status_code=200)
 def getIntradayTest(
     request: Request,
-    date_day: int,
-    date_month: int,
-    date_year: int,
+    start_date_day: int,
+    start_date_month: int,
+    start_date_year: int,
+    end_date_day: int,
+    end_date_month: int,
+    end_date_year: int,
     requestData: StrategyDataType,
     crud: IntradayBackTesterCrud = Depends(getIntradayBacktestCrud)
 ):
     try:
-        date = datetime(date_year, date_month, date_day)
+        start_date = datetime(
+            start_date_year, start_date_month, start_date_day)
+        end_date = datetime(end_date_year, end_date_month, end_date_day)
     except Exception as e:
         logging.warning(
             f'intradayBacktest -- getIntradayTest Daily --> Validation error in date')
@@ -33,7 +38,7 @@ def getIntradayTest(
             status_code=400, detail="invalid dates provided"
         )
 
-    data = crud.testStrategy(date, requestData)
+    data = crud.testStrategy(start_date, end_date, requestData)
 
     if data == None:
         raise HTTPException(

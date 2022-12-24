@@ -1,6 +1,26 @@
 
 
-from backend.model.strategy import SpreadOrderDataType, SpreadStrikeDataType
+from backend.model.strategy import SpreadOrderDataType, SpreadStrikeDataType, StrategyDataType
+
+
+def getStrategyTickers(strategy: StrategyDataType, underlying_value: float) -> list[str]:
+    output = []
+    output.append(strategy.ticker.upper())
+    for order in strategy.spread.order:
+        strike = getSpreadOrderStrike(
+            strategy.ticker, underlying_value, order.strike)
+
+        if str(strike) + order.contract_type not in output:
+            output.append(str(strike) + order.contract_type)
+
+        if order.hedge_strike != None:
+            hedge_strike = getSpreadOrderStrike(
+                strategy.ticker, underlying_value, order.hedge_strike)
+
+            if str(hedge_strike) + order.contract_type not in output:
+                output.append(str(hedge_strike) + order.contract_type)
+
+    return output
 
 
 def getSpreadOrderStrike(ticker: str, underlying_value: float, strike: SpreadStrikeDataType) -> int:
