@@ -5,7 +5,7 @@ from backend.model.candleStick import CandleStickDataType, CandleStickDictDataTy
 from backend.model.order import OrderDataType, OrderSideEnum, OrderStatusType, OrderTypeEnum
 from backend.model.strategy import SpreadOrderDataType, SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
 from backend.model.trade import TradeDataType
-from backend.usecase.strategy_helper import getActiveTickers, updateProfitAndLoss
+from backend.usecase.strategy_helper import getActiveTickers, getActiveTickersWithQuantity, updateProfitAndLoss
 from backend.utils.strategyUtil import getLotSize, getSpreadOrderStrike
 
 
@@ -85,15 +85,8 @@ def processExitLeg(spreadOrder: SpreadOrderDataType, tradeData: TradeDataType, s
 
 def processRemainingExitLegs(tradeData: TradeDataType, candleStickData: dict[str, CandleStickDataType]) -> TradeDataType:
 
-    orderBook = {}
-    for order in tradeData.entry_orders + tradeData.exit_orders:
-        if order.ticker in orderBook.keys():
-            orderBook[order.ticker] = orderBook[order.ticker] + \
-                order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
-        else:
-            orderBook[order.ticker] = order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
+    orderBook = getActiveTickersWithQuantity(tradeData)
 
-    activeTickers = []
     for ticker in orderBook.keys():
         quantity = orderBook[ticker] if orderBook[ticker] > 0 else - \
             1 * orderBook[ticker]

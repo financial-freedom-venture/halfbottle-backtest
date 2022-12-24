@@ -14,17 +14,7 @@ def getActiveTickers(tradeData: Optional[TradeDataType]):
     if tradeData == None:
         return []
 
-    orderBook = {}
-    for order in tradeData.entry_orders + tradeData.exit_orders:
-        if order.ticker in orderBook.keys():
-            orderBook[order.ticker] = orderBook[order.ticker] + \
-                order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
-        else:
-            orderBook[order.ticker] = order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
-
-    # for order in tradeData.exit_orders:
-    #     orderBook[order.ticker] = orderBook[order.ticker] - \
-    #         order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
+    orderBook = getActiveTickersWithQuantity(tradeData)
 
     activeTickers = []
     for ticker in orderBook.keys():
@@ -32,6 +22,21 @@ def getActiveTickers(tradeData: Optional[TradeDataType]):
             activeTickers.append(ticker)
 
     return activeTickers
+
+
+def getActiveTickersWithQuantity(tradeData: Optional[TradeDataType]):
+    if tradeData == None:
+        return []
+
+    orderBook = {}
+    for order in tradeData.entry_orders + tradeData.exit_orders:
+        if order.ticker in orderBook.keys():
+            quantity = order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
+            orderBook[order.ticker] = orderBook[order.ticker] + quantity
+        else:
+            orderBook[order.ticker] = order.quantity if order.order_side == OrderSideEnum.BUY else -1 * order.quantity
+
+    return orderBook
 
 
 def getAllTickers(tradeData: TradeDataType):
