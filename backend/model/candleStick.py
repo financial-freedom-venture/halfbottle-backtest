@@ -100,32 +100,63 @@ class CandleStickListDataType(CustomBaseModel):
 
         return df
 
+    # @staticmethod
+    # def generateFromPandasDf(ticker: str, df: pd.DataFrame, timeframe: TimeFrameTypeEnum) -> CandleStickListDataType:
+    #     output = CandleStickListDataType(data=[])
+    #     for index, row in df.iterrows():
+    #         output.data.append(CandleStickDataType(
+    #             ticker=ticker,
+    #             open=row["open"],
+    #             high=row["high"],
+    #             low=row["low"],
+    #             close=row["close"],
+    #             timestamp=row["timestamp"]/1000 - 19800,
+    #             iso_string=datetime.fromtimestamp(
+    #                 row["timestamp"]/1000 - 19800).isoformat(),
+    #             volume=row["volume"],
+
+    #             open_interest=row["open_interest"] if not isnan(
+    #                 row["open_interest"]) else None,
+    #             strike=row["strike"] if not isnan(
+    #                 row["strike"]) else None,
+    #             expiry_type=row["expiry_type"] if not isnan(
+    #                 row["strike"]) else None,
+    #             expiry=row["expiry"] if not isnan(
+    #                 row["strike"]) else None,
+    #             instrument=row["instrument"],
+    #             contract_type=row["contract_type"] if not isnan(
+    #                 row["strike"]) else None,
+    #             timeframe=timeframe
+    #         ))
+
+    #     return output
+
     @staticmethod
     def generateFromPandasDf(ticker: str, df: pd.DataFrame, timeframe: TimeFrameTypeEnum) -> CandleStickListDataType:
         output = CandleStickListDataType(data=[])
-        for index, row in df.iterrows():
+        for row in df.itertuples():
             output.data.append(CandleStickDataType(
                 ticker=ticker,
-                open=row["open"],
-                high=row["high"],
-                low=row["low"],
-                close=row["close"],
-                timestamp=row["timestamp"]/1000 - 19800,
+                open=row.open,
+                high=row.high,
+                low=row.low,
+                close=row.close,
+                timestamp=row.timestamp/1000 - 19800,
                 iso_string=datetime.fromtimestamp(
-                    row["timestamp"]/1000 - 19800).isoformat(),
-                volume=row["volume"],
+                    row.timestamp/1000 - 19800).isoformat(),
+                volume=row.volume,
 
-                open_interest=row["open_interest"] if not isnan(
-                    row["open_interest"]) else None,
-                strike=row["strike"] if not isnan(
-                    row["strike"]) else None,
-                expiry_type=row["expiry_type"] if not isnan(
-                    row["strike"]) else None,
-                expiry=row["expiry"] if not isnan(
-                    row["strike"]) else None,
-                instrument=row["instrument"],
-                contract_type=row["contract_type"] if not isnan(
-                    row["strike"]) else None,
+                open_interest=row.open_interest if not isnan(
+                    row.open_interest) else None,
+                strike=row.strike if not isnan(
+                    row.strike) else None,
+                expiry_type=row.expiry_type if not isnan(
+                    row.strike) else None,
+                expiry=row.expiry if not isnan(
+                    row.strike) else None,
+                instrument=row.instrument,
+                contract_type=row.contract_type if not isnan(
+                    row.strike) else None,
                 timeframe=timeframe
             ))
 

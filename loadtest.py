@@ -1,11 +1,12 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import threading
 import requests
 import time
 
 MAX_THREADS = 1
-TOTAL_REQUEST = 1
 
+START_DATE = datetime(2020, 1, 1)
+END_DATE = datetime(2020, 12, 31)
 
 strategyJson = {
     "ticker": "CNXBAN",
@@ -49,19 +50,30 @@ strategyJson = {
     }
 }
 
+total_days = (END_DATE - START_DATE).days + 1
+DAYS_PER_THREAD = int(total_days/MAX_THREADS)
+
 URL = "http://localhost:8001/intraday/"
-PARAMS = {
-    "date_day": 1,
-    "date_month": 1,
-    "date_year": 2020
-}
 BODY = strategyJson
 
 
-def getRequest(output: list):
+def getRequest(index: int, output: list):
+    start_date = START_DATE + timedelta(days=index * DAYS_PER_THREAD)
+    end_date = START_DATE + \
+        timedelta(days=(index + 1) * DAYS_PER_THREAD -
+                  1) if index != MAX_THREADS - 1 else END_DATE
+    params = {
+        "start_date_day": start_date.day,
+        "start_date_month": start_date.month,
+        "start_date_year": start_date.year,
+
+        "end_date_day": end_date.day,
+        "end_date_month": end_date.month,
+        "end_date_year": end_date.year
+    }
     start_time = datetime.now()
     entry = {}
-    response = requests.post(url=URL, json=BODY, params=PARAMS)
+    response = requests.post(url=URL, json=BODY, params=params)
 
     end_time = datetime.now()
     entry["status_code"] = response.status_code
@@ -77,17 +89,11 @@ start = time.time()
 output = []
 index = 0
 threadPool: list[threading.Thread] = []
-while index < TOTAL_REQUEST:
-    if len(threadPool) < MAX_THREADS:
-        process = threading.Thread(target=getRequest, args=(output,))
-        threadPool.append(process)
-        process.start()
-        index = index + 1
-    else:
-        while len(threadPool) != 0:
-            thread = threadPool.pop()
-            thread.join()
-        print(f'# Percent Complete - {index*100/TOTAL_REQUEST}')
+while index < MAX_THREADS:
+    process = threading.Thread(target=getRequest, args=(index, output,))
+    threadPool.append(process)
+    process.start()
+    index = index + 1
 
 while len(threadPool) != 0:
     thread = threadPool.pop()
@@ -103,7 +109,7 @@ for entry in output:
     if entry["status_code"] != 200:
         total_failed = total_failed + 1
 
-    average_time = average_time + entry["time"]/TOTAL_REQUEST
+    average_time = average_time + entry["time"]/MAX_THREADS
 
     if max_time < entry["time"]:
         max_time = entry["time"]
@@ -112,7 +118,7 @@ print("")
 print("")
 print("")
 print("----------------  Report  -----------------")
-print(f'# Total Failed Percent - {total_failed*100/TOTAL_REQUEST}')
+print(f'# Total Failed Percent - {total_failed*100/MAX_THREADS}')
 print(f'# Average Request Time - {average_time} ms')
 print(f'# Max Request Time - {max_time} ms')
 print(f'# Total Time - {end - start} seconds')

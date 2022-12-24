@@ -69,7 +69,9 @@ class StrategyBackTester:
                 output[str(hedge_strike)+order.contract_type] = data
 
         # format output
-        return convertFastAccessData(output)
+        output = convertFastAccessData(output)
+
+        return output
 
     def testStrategy(self, date: datetime, strategy: StrategyDataType) -> Optional[TradeDataType]:
         if date.strftime("%A").lower() not in strategy.entry.included_days and len(strategy.entry.included_days) != 0:
@@ -79,7 +81,9 @@ class StrategyBackTester:
         if data == None:
             return None
 
-        return self.executeStrategy(strategy, data)
+        tradeData = self.executeStrategy(strategy, data)
+
+        return tradeData
 
     def executeStrategy(self, strategy: StrategyDataType, candleStickData: dict[str, CandleStickDictDataType]) -> Optional[TradeDataType]:
         output: TradeDataType = None
