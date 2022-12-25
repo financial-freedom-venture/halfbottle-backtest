@@ -3,10 +3,10 @@ import threading
 import requests
 import time
 
-MAX_THREADS = 120
+MAX_THREADS = 1
 
 START_DATE = datetime(2020, 1, 1)
-END_DATE = datetime(2020, 12, 31)
+END_DATE = datetime(2020, 1, 1)
 
 strategyJson = {
     "ticker": "CNXBAN",
@@ -36,13 +36,13 @@ strategyJson = {
         "order": [
             {
                 "strike": {"strike_type": "ATM_AND_STRIKE_POINTS", "value": "ATM+0"},
-                "order_side": "buy",
+                "order_side": "sell",
                 "contract_type": "call",
                 "stoploss_percent": 40
             },
             {
                 "strike":  {"strike_type": "ATM_AND_STRIKE_POINTS", "value": "ATM+0"},
-                "order_side": "buy",
+                "order_side": "sell",
                 "contract_type": "put",
                 "stoploss_percent": 40
             }
