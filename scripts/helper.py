@@ -90,13 +90,13 @@ def __writeCashFiles(data: dict[str, CandleStickListDataType]) -> bool:
     for key in data.keys():
         directory = directoryPath + "CASH/" + \
             data[key].data[0].ticker + "/"
-
-        if os.path.exists(directory + key + ".csv"):
-            continue
         try:
             os.makedirs(directory)
         except FileExistsError:
             count = 1
+
+        if os.path.exists(directory + key + ".csv"):
+            continue
 
         df = data[key].generatePandasDf()
         df.to_csv(directory + key + '.csv', sep=',')
@@ -119,13 +119,13 @@ def __writeOptionsFiles(data: dict[str, CandleStickListDataType]) -> bool:
         directory = directoryPath + "OPTIONS/" + \
             ticker + "/" + expiry_type + "/" + "EXPIRY-++" + expiry.split("T")[0] + \
             "/" + date + "/"
-
-        if os.path.exists(directory + filename + ".csv"):
-            continue
         try:
             os.makedirs(directory)
         except FileExistsError:
             count = 1
+
+        if os.path.exists(directory + filename + ".csv"):
+            continue
 
         df = data[key].generatePandasDf()
         df.to_csv(directory + filename + ".csv", sep=',')
