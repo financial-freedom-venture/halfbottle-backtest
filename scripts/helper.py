@@ -3,7 +3,7 @@ from datetime import date, datetime, timedelta
 import json
 import logging
 import os
-from backend.model.candleStick import CandleStickDataType, TimeFrameTypeEnum, CandleStickListDataType, InstrumentTypeEnum
+from candleStick import CandleStickDataType, TimeFrameTypeEnum, CandleStickListDataType, InstrumentTypeEnum
 import pandas as pd
 
 
