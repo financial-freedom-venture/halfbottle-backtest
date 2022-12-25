@@ -1,5 +1,0 @@
-,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1543831320000,700.0,700.0,700.0,700.0,20,,27500,weekly,2018-12-13T21:00:00.000,options,put
-1,1543835280000,701.6,702.1,701.6,702.1,40,,27500,weekly,2018-12-13T21:00:00.000,options,put
-2,1543835400000,702.9,702.9,702.9,702.9,20,,27500,weekly,2018-12-13T21:00:00.000,options,put
-3,1543838700000,800.0,800.0,800.0,800.0,20,,27500,weekly,2018-12-13T21:00:00.000,options,put
