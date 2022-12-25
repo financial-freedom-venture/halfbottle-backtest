@@ -1,5 +1,0 @@
-,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1568193720000,340.0,340.0,331.65,331.65,150,,10750,weekly,2019-9-26T21:00:00.000,options,call
-1,1568208240000,348.8,348.8,348.8,348.8,75,,10750,weekly,2019-9-26T21:00:00.000,options,call
-2,1568209980000,363.15,363.15,363.15,363.15,75,,10750,weekly,2019-9-26T21:00:00.000,options,call
-3,1568212740000,368.25,368.25,368.25,368.25,75,,10750,weekly,2019-9-26T21:00:00.000,options,call
