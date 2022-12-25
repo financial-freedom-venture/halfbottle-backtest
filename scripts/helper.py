@@ -90,6 +90,9 @@ def __writeCashFiles(data: dict[str, CandleStickListDataType]) -> bool:
     for key in data.keys():
         directory = directoryPath + "CASH/" + \
             data[key].data[0].ticker + "/"
+
+        if os.path.exists(directory + key + ".csv"):
+            continue
         try:
             os.makedirs(directory)
         except FileExistsError:
@@ -118,7 +121,7 @@ def __writeOptionsFiles(data: dict[str, CandleStickListDataType]) -> bool:
             "/" + date + "/"
 
         if os.path.exists(directory + filename + ".csv"):
-            return True
+            continue
         try:
             os.makedirs(directory)
         except FileExistsError:
