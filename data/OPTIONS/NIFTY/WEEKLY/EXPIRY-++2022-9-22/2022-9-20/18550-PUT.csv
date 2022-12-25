@@ -1,5 +1,0 @@
-,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1663668180,707.0,707.0,707.0,707.0,100,650,18550,weekly,2022-9-22T21:00:00.000,options,put
-1,1663669800,695.0,695.0,695.0,695.0,50,650,18550,weekly,2022-9-22T21:00:00.000,options,put
-2,1663682580,660.0,660.0,660.0,660.0,50,700,18550,weekly,2022-9-22T21:00:00.000,options,put
-3,1663684980,680.0,680.0,680.0,680.0,50,750,18550,weekly,2022-9-22T21:00:00.000,options,put
