@@ -1,0 +1,4 @@
+,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
+0,1658481360000,4883.7,4883.7,4883.7,4883.7,100,8150,31500,weekly,2022-7-28T21:00:00.000,options,call
+1,1658490600000,5070.7,5070.7,5070.7,5070.7,25,8250,31500,weekly,2022-7-28T21:00:00.000,options,call
+2,1658499960000,5275.75,5275.75,5275.75,5275.75,50,8250,31500,weekly,2022-7-28T21:00:00.000,options,call
