@@ -116,6 +116,9 @@ def __writeOptionsFiles(data: dict[str, CandleStickListDataType]) -> bool:
         directory = directoryPath + "OPTIONS/" + \
             ticker + "/" + expiry_type + "/" + "EXPIRY-++" + expiry.split("T")[0] + \
             "/" + date + "/"
+
+        if os.path.exists(directory + filename + ".csv"):
+            return True
         try:
             os.makedirs(directory)
         except FileExistsError:
