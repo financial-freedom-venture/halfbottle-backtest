@@ -48,7 +48,7 @@ class CsvDataStore(metaclass=Singleton):
             elif parts[0].upper() == "OPTIONS":
                 if parts[1] in availableData.options.keys():
 
-                    expiry_date_str = parts[3].split("->>")[1]
+                    expiry_date_str = parts[3].split("-++")[1]
                     expiry_date = datetime(int(expiry_date_str.split(
                         "-")[0]), int(expiry_date_str.split("-")[1]), int(expiry_date_str.split("-")[2]))
 
@@ -88,7 +88,7 @@ class CsvDataStore(metaclass=Singleton):
                                           ] = AvailableOptionsExpiryData(weekly_expiry_data={}, monthly_expiry_data={})
 
                     if parts[2] == "WEEKLY":
-                        expiry_date_str = parts[3].split("->>")[1]
+                        expiry_date_str = parts[3].split("-++")[1]
                         expiry_date = datetime(int(expiry_date_str.split(
                             "-")[0]), int(expiry_date_str.split("-")[1]), int(expiry_date_str.split("-")[2]))
 
@@ -101,7 +101,7 @@ class CsvDataStore(metaclass=Singleton):
                         availableData.options[parts[1]
                                               ].weekly_expiry_data[expiry_date][data_date] = [parts[5].removesuffix(".csv")]
                     elif parts[2] == "MONTHLY":
-                        expiry_date_str = parts[3].split("->>")[1]
+                        expiry_date_str = parts[3].split("-++")[1]
                         expiry_date = datetime(int(expiry_date_str.split(
                             "-")[0]), int(expiry_date_str.split("-")[1]), int(expiry_date_str.split("-")[2]))
 
@@ -158,7 +158,7 @@ class CsvDataStore(metaclass=Singleton):
 
         path = self.DATA_PATH + "/OPTIONS/" + ticker.upper() + "/" + \
             expiry_type.upper() + '/' + \
-            "EXPIRY->>" + formattedExpiryDate + '/' + \
+            "EXPIRY-++" + formattedExpiryDate + '/' + \
             formattedDate + '/' + \
             str(strike) + '-' + contract_type.upper() + '.csv'
         path = path.replace("//", "/")
