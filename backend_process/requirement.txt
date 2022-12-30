@@ -1,0 +1,11 @@
+plotly
+matplotlib
+pydantic
+breeze_connect
+nsepy
+fastapi
+uvicorn
+pandas
+python-decouple
+decouple
+python-dotenv

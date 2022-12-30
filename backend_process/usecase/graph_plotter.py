@@ -1,7 +1,7 @@
 
 from datetime import datetime
-from backend.dataservice.historical_dataservice import HistoricalDataService
-from backend.model.candleStick import CandleStickDataType
+from backend_process.dataservice.historical_dataservice import HistoricalDataService
+from backend_process.model.candleStick import CandleStickDataType
 import pandas as pd
 import plotly.graph_objects as go
 

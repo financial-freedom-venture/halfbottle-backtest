@@ -1,8 +1,8 @@
 from enum import Enum
 from typing import Optional, Union
-from backend.model.baseModel import CustomBaseModel
-from backend.model.order import OrderDataType, OrderSideEnum
-from backend.model.strategy import SpreadOrderDataType
+from backend_process.model.baseModel import CustomBaseModel
+from backend_process.model.order import OrderDataType, OrderSideEnum
+from backend_process.model.strategy import SpreadOrderDataType
 
 
 class TradeEntryTypeEnum(str, Enum):

@@ -13,6 +13,20 @@
       "justMyCode": true
     },
     {
+      "name": "Python: Backtest Process FastAPI",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "backend_process.main:app",
+        "--host",
+        "0.0.0.0",
+        "--reload",
+        "--port",
+        "8001"
+      ]
+    },
+    {
       "name": "Python: Backtest FastAPI",
       "type": "python",
       "request": "launch",
@@ -23,7 +37,7 @@
         "0.0.0.0",
         "--reload",
         "--port",
-        "8001"
+        "8000"
       ]
     }
   ]

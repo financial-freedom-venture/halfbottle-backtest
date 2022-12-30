@@ -1,9 +1,9 @@
 
 from datetime import datetime
-from backend.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
-from backend.dataservice.historical_dataservice import HistoricalDataService
-from backend.model.strategy import StrategyDataType
-from backend.usecase.strategy_tester import StrategyBackTester
+from backend_process.crud.optionIntradayBacktestCrud import IntradayBackTesterCrud
+from backend_process.dataservice.historical_dataservice import HistoricalDataService
+from backend_process.model.strategy import StrategyDataType
+from backend_process.usecase.strategy_tester import StrategyBackTester
 
 
 strategyJson = {

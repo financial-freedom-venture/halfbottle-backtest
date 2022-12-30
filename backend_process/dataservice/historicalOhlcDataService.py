@@ -1,7 +1,7 @@
 from datetime import datetime
-from backend.datastore.csvDataStore import CsvDataStore
-from backend.model.candleStick import CandleStickListDataType, ContractTypeEnum, ExpiryTypeEnum, TimeFrameTypeEnum
-from backend.model.error import ErrorResponse
+from backend_process.datastore.csvDataStore import CsvDataStore
+from backend_process.model.candleStick import CandleStickListDataType, ContractTypeEnum, ExpiryTypeEnum, TimeFrameTypeEnum
+from backend_process.model.error import ErrorResponse
 from typing import Tuple, Optional
 
 

@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
 from typing import Optional
-from backend.dto.entryDto import TradeEntryConditionResponseDTO, TradeEntryResponseDataDTO, TradeEntryTypeEnum
-from backend.model.candleStick import CandleStickDataType
-from backend.model.strategy import SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
-from backend.model.trade import TradeDataType
-from backend.utils.strategyUtil import getSpreadOrderStrike
+from backend_process.dto.entryDto import TradeEntryConditionResponseDTO, TradeEntryResponseDataDTO, TradeEntryTypeEnum
+from backend_process.model.candleStick import CandleStickDataType
+from backend_process.model.strategy import SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
+from backend_process.model.trade import TradeDataType
+from backend_process.utils.strategyUtil import getSpreadOrderStrike
 
 
 def checkEntryCondition(tradeData: Optional[TradeDataType], timestamp: int, strategy: StrategyDataType, candleStickData: dict[str, CandleStickDataType]) -> TradeEntryConditionResponseDTO:

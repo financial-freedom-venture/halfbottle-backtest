@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from typing import Optional
-from backend.model.strategy import StrategyDataType
-from backend.model.trade import TradeDataType, TradeOutputEnum, TradeReportDataType
-from backend.usecase.strategy_tester import StrategyBackTester
+from backend_process.model.strategy import StrategyDataType
+from backend_process.model.trade import TradeDataType, TradeOutputEnum, TradeReportDataType
+from backend_process.usecase.strategy_tester import StrategyBackTester
 
 
 class IntradayBackTesterCrud:

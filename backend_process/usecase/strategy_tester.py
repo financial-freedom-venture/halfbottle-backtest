@@ -1,19 +1,19 @@
 from datetime import datetime
 import json
 from typing import Optional, Union
-from backend.dataservice.historicalOhlcDataService import HistoricalOhlcDataService
-from backend.dataservice.historical_dataservice import HistoricalDataService
-from backend.dto.entryDto import TradeEntryConditionResponseDTO, TradeEntryTypeEnum
-from backend.dto.exitDto import TradeExitConditionResponseDTO, TradeExitTypeEnum
-from backend.model.candleStick import CandleStickDataType, CandleStickDictDataType
-from backend.model.strategy import StrategyDataType
-from backend.usecase.entry_condition import checkEntryCondition
-from backend.usecase.exit_condition import checkExitCondition
-from backend.model.trade import TradeDataType, TradeOutputEnum, TradeStatusEnum
-from backend.usecase.order_helper import placeEntryOrders, processExitLeg, processRemainingExitLegs
-from backend.usecase.strategy_helper import updateProfitAndLoss
-from backend.utils.candleUtils import convertFastAccessData, getMostRecentCandle
-from backend.utils.strategyUtil import getSpreadOrderStrike
+from backend_process.dataservice.historicalOhlcDataService import HistoricalOhlcDataService
+from backend_process.dataservice.historical_dataservice import HistoricalDataService
+from backend_process.dto.entryDto import TradeEntryConditionResponseDTO, TradeEntryTypeEnum
+from backend_process.dto.exitDto import TradeExitConditionResponseDTO, TradeExitTypeEnum
+from backend_process.model.candleStick import CandleStickDataType, CandleStickDictDataType
+from backend_process.model.strategy import StrategyDataType
+from backend_process.usecase.entry_condition import checkEntryCondition
+from backend_process.usecase.exit_condition import checkExitCondition
+from backend_process.model.trade import TradeDataType, TradeOutputEnum, TradeStatusEnum
+from backend_process.usecase.order_helper import placeEntryOrders, processExitLeg, processRemainingExitLegs
+from backend_process.usecase.strategy_helper import updateProfitAndLoss
+from backend_process.utils.candleUtils import convertFastAccessData, getMostRecentCandle
+from backend_process.utils.strategyUtil import getSpreadOrderStrike
 
 
 DATA_PATH = "./strategy/"

@@ -1,12 +1,12 @@
 from datetime import datetime, timedelta
 from typing import Optional
-from backend.dto.exitDto import TradeExitConditionResponseDTO, TradeExitResponseDataDTO, TradeExitTypeEnum
-from backend.model.candleStick import CandleStickDataType
-from backend.model.strategy import SpreadStoplossConditionTypeEnum, StrategyDataType
-from backend.model.trade import TradeDataType
-from backend.usecase.stoploss_conditions import checkIfLegStopLossHit, checkIfMTMStopLossHit, checkIfTakeProfitHit
-from backend.usecase.strategy_helper import getActiveTickers, getOrderData
-from backend.utils.strategyUtil import getSpreadOrderStrike
+from backend_process.dto.exitDto import TradeExitConditionResponseDTO, TradeExitResponseDataDTO, TradeExitTypeEnum
+from backend_process.model.candleStick import CandleStickDataType
+from backend_process.model.strategy import SpreadStoplossConditionTypeEnum, StrategyDataType
+from backend_process.model.trade import TradeDataType
+from backend_process.usecase.stoploss_conditions import checkIfLegStopLossHit, checkIfMTMStopLossHit, checkIfTakeProfitHit
+from backend_process.usecase.strategy_helper import getActiveTickers, getOrderData
+from backend_process.utils.strategyUtil import getSpreadOrderStrike
 
 
 def checkExitCondition(tradeData: TradeDataType, timestamp: int, strategy: StrategyDataType, candleStickData: dict[str, CandleStickDataType]) -> Optional[TradeExitConditionResponseDTO]:

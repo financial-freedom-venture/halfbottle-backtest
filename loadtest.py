@@ -6,7 +6,7 @@ import time
 MAX_THREADS = 50
 
 START_DATE = datetime(2019, 1, 1)
-END_DATE = datetime(2020, 12, 31)
+END_DATE = datetime(2019, 1, 1)
 
 strategyJson = {
     "ticker": "CNXBAN",
@@ -57,7 +57,7 @@ if total_days < MAX_THREADS:
 DAYS_PER_THREAD = int(total_days/MAX_THREADS)
 
 
-URL = "https://backtest.halfbottle.in/intraday/"
+URL = "http://localhost:8001/intraday/"
 BODY = strategyJson
 
 
@@ -94,7 +94,9 @@ total_days_left = total_days
 while index < MAX_THREADS:
     days_per_thread = int(total_days_left/(MAX_THREADS - index))
     end_date = currentDate + \
-        timedelta(days=days_per_thread)
+        timedelta(days=days_per_thread - 1)
+    if end_date > END_DATE:
+        end_date = END_DATE
     process = threading.Thread(
         target=getRequest, args=(currentDate, end_date, output,))
     threadPool.append(process)

@@ -1,12 +1,12 @@
 
 
 from typing import Tuple
-from backend.model.candleStick import CandleStickDataType, CandleStickDictDataType
-from backend.model.order import OrderDataType, OrderSideEnum, OrderStatusType, OrderTypeEnum
-from backend.model.strategy import SpreadOrderDataType, SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
-from backend.model.trade import TradeDataType
-from backend.usecase.strategy_helper import getActiveTickers, getActiveTickersWithQuantity, updateProfitAndLoss
-from backend.utils.strategyUtil import getLotSize, getSpreadOrderStrike
+from backend_process.model.candleStick import CandleStickDataType, CandleStickDictDataType
+from backend_process.model.order import OrderDataType, OrderSideEnum, OrderStatusType, OrderTypeEnum
+from backend_process.model.strategy import SpreadOrderDataType, SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
+from backend_process.model.trade import TradeDataType
+from backend_process.usecase.strategy_helper import getActiveTickers, getActiveTickersWithQuantity, updateProfitAndLoss
+from backend_process.utils.strategyUtil import getLotSize, getSpreadOrderStrike
 
 
 def placeEntryOrders(timestamp: int, strategy: StrategyDataType, candleStickData: dict[str, CandleStickDataType]) -> Tuple[int, list[OrderDataType]]:
