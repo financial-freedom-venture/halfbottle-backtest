@@ -37,17 +37,19 @@ class IntradayBackTesterCrud:
         for tradeData in tradesData:
 
             totalROI = totalROI + tradeData.pnl[len(tradeData.pnl) - 1].points
-
+            # averagePoints = totalROI / len(tradesData)
             if tradeData.trade_output == TradeOutputEnum.WINNER:
                 totalWinPoints = totalWinPoints + \
                     tradeData.pnl[len(tradeData.pnl) - 1].points
                 totalWinners = totalWinners + 1
+                # averageWinPoints = totalWinPoints / totalWinners
                 if tradeData.pnl[len(tradeData.pnl) - 1].points > maxWinner:
                     maxWinner = tradeData.pnl[len(tradeData.pnl) - 1].points
             else:
                 totalLostPoints = totalLostPoints + \
                     tradeData.pnl[len(tradeData.pnl) - 1].points
                 totalLosers = totalLosers + 1
+                # averageLostPoints = totalLostPoints / totalLosers
                 if tradeData.pnl[len(tradeData.pnl) - 1].points < maxLoser:
                     maxLoser = tradeData.pnl[len(tradeData.pnl) - 1].points
 
@@ -56,9 +58,11 @@ class IntradayBackTesterCrud:
             total_trades=len(tradesData),
             total_won_points=totalWinPoints,
             total_won_trades=totalWinners,
+            # average_won_points = averageWinPoints,
             max_won_point=maxWinner,
             total_lost_points=totalLostPoints,
             total_lost_trades=totalLosers,
             max_lost_point=maxLoser
+            # average_lost_point= averageLostPoints
 
         )
