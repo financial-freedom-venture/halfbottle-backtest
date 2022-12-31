@@ -75,7 +75,7 @@ def getDistributedTest(
             status_code=400, detail="invalid dates provided"
         )
 
-    data = crud.testStrategy(start_date, end_date, requestData)
+    data = crud.testStrategy(start_date, end_date, requestData, True)
 
     if data == None:
         raise HTTPException(

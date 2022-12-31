@@ -22,7 +22,7 @@ class OptionsBacktestOrchestratorCrud:
         self.settings = settings
         return
 
-    def __processRequest(self, strategy: StrategyDataType, start_date: datetime, end_date: datetime, output: list[DistributedResponseType]):
+    def __processRequest(self, strategy: StrategyDataType, start_date: datetime, end_date: datetime, output: list[DistributedResponseType], detailed: bool = False):
         params = {
             "start_date_day": start_date.day,
             "start_date_month": start_date.month,
@@ -33,15 +33,17 @@ class OptionsBacktestOrchestratorCrud:
             "end_date_year": end_date.year
         }
         start_time = datetime.now()
+        url = self.settings.PROCESS_URL if not detailed else self.settings.PROCESS_URL + 'detailed'
         response = requests.post(
-            url=self.settings.PROCESS_URL, json=strategy.dict(), params=params)
+            url=url, json=strategy.dict(), params=params)
 
         end_time = datetime.now()
         try:
             formattedResponse = DistributedResponseType(
                 statusCode=response.status_code,
                 time=float((end_time - start_time).microseconds/1000),
-                tradeData=TradeReportDataType(**response.json())
+                tradeData=TradeReportDataType(
+                    **response.json()) if not detailed else TradeDetailedDataType(**response.json())
             )
         except Exception as e:
             formattedResponse = DistributedResponseType(
@@ -58,18 +60,18 @@ class OptionsBacktestOrchestratorCrud:
 
         return self.settings.MAX_THREADS
 
-    def testStrategy(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType) -> Optional[TradeReportDataType]:
+    def testStrategy(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType, detailed: bool = False) -> Optional[TradeReportDataType]:
 
         start = time.time()
         output: list[DistributedResponseType] = []
 
-        self.__processRequest(strategy, start_date, end_date, output)
+        self.__processRequest(strategy, start_date, end_date, output, detailed)
 
         end = time.time()
 
-        return self.clubTradeReport(output, end-start)
+        return self.clubTradeReport(output, end-start, detailed=detailed)
 
-    def testStrategyDistributed(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType) -> Optional[TradeReportDataType]:
+    def testStrategyDistributed(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType, detailed: bool = False) -> Optional[TradeReportDataType]:
         max_threads = self.__getMaxThreads(start_date, end_date)
 
         start = time.time()
@@ -85,7 +87,7 @@ class OptionsBacktestOrchestratorCrud:
             if temp_end_date > end_date:
                 temp_end_date = end_date
             process = threading.Thread(
-                target=self.__processRequest, args=(strategy, currentDate, temp_end_date, output,))
+                target=self.__processRequest, args=(strategy, currentDate, temp_end_date, output, detailed,))
             threadPool.append(process)
             process.start()
             index = index + 1
@@ -96,9 +98,19 @@ class OptionsBacktestOrchestratorCrud:
             thread.join()
         end = time.time()
 
-        return self.clubTradeReport(output, end-start, max_threads)
+        return self.clubTradeReport(output, end-start, max_threads, detailed)
 
-    def clubTradeReport(self, tradeReports: list[DistributedResponseType], totalTime: float, max_threads: int = 1) -> TradeReportDataType:
+    def clubTradeReport(self, tradeReports: list[DistributedResponseType], totalTime: float, max_threads: int = 1, detailed: bool = False) -> Union[TradeReportDataType, TradeDetailedDataType]:
+        if detailed:
+            output = TradeDetailedDataType(
+                tradeData=[]
+            )
+            for entry in tradeReports:
+                output.tradeData = output.tradeData + entry.tradeData.tradeData
+            
+            return output
+            
+        
         total_failed = 0
         average_time = 0.0
         max_time = 0
