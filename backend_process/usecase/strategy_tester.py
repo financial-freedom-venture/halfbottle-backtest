@@ -5,11 +5,11 @@ from backend_process.dataservice.historicalOhlcDataService import HistoricalOhlc
 from backend_process.dataservice.historical_dataservice import HistoricalDataService
 from backend_process.dto.entryDto import TradeEntryConditionResponseDTO, TradeEntryTypeEnum
 from backend_process.dto.exitDto import TradeExitConditionResponseDTO, TradeExitTypeEnum
-from backend_process.model.candleStick import CandleStickDataType, CandleStickDictDataType
-from backend_process.model.strategy import StrategyDataType
+from model.candleStick import CandleStickDataType, CandleStickDictDataType
+from model.strategy import StrategyDataType
 from backend_process.usecase.entry_condition import checkEntryCondition
 from backend_process.usecase.exit_condition import checkExitCondition
-from backend_process.model.trade import TradeDataType, TradeOutputEnum, TradeStatusEnum
+from model.trade import TradeDataType, TradeOutputEnum, TradeStatusEnum
 from backend_process.usecase.order_helper import placeEntryOrders, processExitLeg, processRemainingExitLegs
 from backend_process.usecase.strategy_helper import updateProfitAndLoss
 from backend_process.utils.candleUtils import convertFastAccessData, getMostRecentCandle
@@ -131,6 +131,7 @@ class StrategyBackTester:
             timestamp, strategy, candleStickData)
 
         output = TradeDataType(
+            underlying_ticker=strategy.ticker,
             leverage=1,
             spread=[],
             quantity=1,

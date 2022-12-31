@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from backend_process.dto.entryDto import TradeEntryConditionResponseDTO, TradeEntryResponseDataDTO, TradeEntryTypeEnum
-from backend_process.model.candleStick import CandleStickDataType
-from backend_process.model.strategy import SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
-from backend_process.model.trade import TradeDataType
+from model.candleStick import CandleStickDataType
+from model.strategy import SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
+from model.trade import TradeDataType
 from backend_process.utils.strategyUtil import getSpreadOrderStrike
 
 

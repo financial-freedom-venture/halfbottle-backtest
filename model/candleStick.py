@@ -3,7 +3,7 @@ from datetime import datetime
 from enum import Enum
 from math import isnan
 from typing import Optional
-from backend.model.baseModel import CustomBaseModel
+from model.baseModel import CustomBaseModel
 import pandas as pd
 
 

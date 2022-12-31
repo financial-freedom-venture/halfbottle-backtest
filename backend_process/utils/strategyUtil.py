@@ -1,6 +1,6 @@
 
 
-from backend_process.model.strategy import SpreadOrderDataType, SpreadStrikeDataType, StrategyDataType
+from model.strategy import SpreadOrderDataType, SpreadStrikeDataType, StrategyDataType
 
 
 def getStrategyTickers(strategy: StrategyDataType, underlying_value: float) -> list[str]:

@@ -1,6 +1,6 @@
 from functools import lru_cache
 from backend.crud.optionsBacktestOrchestratorCrud import OptionsBacktestOrchestratorCrud
-from ..model import setting
+from model import setting
 
 
 def getOptionsBacktestOrchestratorCrud() -> OptionsBacktestOrchestratorCrud:

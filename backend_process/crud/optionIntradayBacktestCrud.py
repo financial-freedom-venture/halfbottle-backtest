@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
-from typing import Optional
-from backend_process.model.strategy import StrategyDataType
-from backend_process.model.trade import TradeDataType, TradeOutputEnum, TradeReportDataType
+from typing import Optional, Union
+from model.strategy import StrategyDataType
+from model.trade import TradeDataType, TradeDetailedDataType, TradeOutputEnum, TradeReportDataType
 from backend_process.usecase.strategy_tester import StrategyBackTester
 
 
@@ -11,7 +11,7 @@ class IntradayBackTesterCrud:
         self.strategyTesterService = strategyTesterService
         return
 
-    def testStrategy(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType) -> Optional[TradeReportDataType]:
+    def testStrategy(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType, detailedReport: bool = False) -> Union[TradeReportDataType, TradeDetailedDataType, None]:
         tradeDataList = []
 
         currentDate = start_date
@@ -22,6 +22,8 @@ class IntradayBackTesterCrud:
                 tradeDataList.append(tradeData)
             currentDate = currentDate + timedelta(days=1)
 
+        if detailedReport:
+            return TradeDetailedDataType(tradeData=tradeDataList)
         return self.generateTradeReport(tradeDataList)
 
     def generateTradeReport(self, tradesData: list[TradeDataType]) -> TradeReportDataType:

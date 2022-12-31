@@ -1,6 +1,9 @@
+# import sys
+# sys.path.append("..")
+
 from typing import Optional
 from enum import Enum
-from backend_process.model.baseModel import CustomBaseModel
+from model.baseModel import CustomBaseModel
 
 
 class OrderSideEnum(str, Enum):

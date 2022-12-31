@@ -1,7 +1,11 @@
+# import sys
+# sys.path.append("..")
+
+# test
 from enum import Enum
 from typing import Union
-from backend.model.baseModel import CustomBaseModel
-from backend.model.order import OrderDataType, OrderSideEnum
+from model.baseModel import CustomBaseModel
+from model.order import OrderDataType, OrderSideEnum
 
 
 class TradeSpreadEntryDataType(CustomBaseModel):
@@ -33,6 +37,7 @@ class PnlDataType(CustomBaseModel):
 
 
 class TradeDataType(CustomBaseModel):
+    underlying_ticker: str
     leverage: int
     spread: list[TradeSpreadEntryDataType]
     quantity: int
@@ -52,6 +57,10 @@ class TradeDataType(CustomBaseModel):
     entry_orders: list[OrderDataType]
     exit_orders: list[OrderDataType]
     stoploss_hit_strikes: dict[str, float] = {}
+
+
+class TradeDetailedDataType(CustomBaseModel):
+    tradeData: list[TradeDataType] = []
 
 
 class TradeReportDataType(CustomBaseModel):

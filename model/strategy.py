@@ -1,10 +1,10 @@
 from enum import Enum
 from typing import Optional, Union
-from backend_process.model.baseModel import CustomBaseModel
-from backend_process.model.candleStick import ContractTypeEnum, ExpiryTypeEnum
-from backend_process.model.order import OrderSideEnum
-from backend_process.model.trade import TradeDirectionTypeEnum
-from backend_process.model.trailing import TrailingStopLossDataType
+from model.baseModel import CustomBaseModel
+from model.candleStick import ContractTypeEnum, ExpiryTypeEnum
+from model.order import OrderSideEnum
+from model.trade import TradeDirectionTypeEnum
+from model.trailing import TrailingStopLossDataType
 
 
 class DaysInWeekTypeEnum(str, Enum):

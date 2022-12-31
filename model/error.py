@@ -1,6 +1,6 @@
-from enum import Enum
+from model.baseModel import CustomBaseModel
 from typing import Union
-from backend_process.model.baseModel import CustomBaseModel
+from enum import Enum
 
 
 class ErrorCodeEnum(str, Enum):

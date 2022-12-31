@@ -1,8 +1,8 @@
 
-from backend_process.model.candleStick import CandleStickDataType
-from backend_process.model.order import OrderDataType, OrderSideEnum
-from backend_process.model.strategy import ExitConditionDataSourceEnum, StrategyDataType
-from backend_process.model.trade import TradeDataType, TradeDirectionTypeEnum
+from model.candleStick import CandleStickDataType
+from model.order import OrderDataType, OrderSideEnum
+from model.strategy import ExitConditionDataSourceEnum, StrategyDataType
+from model.trade import TradeDataType, TradeDirectionTypeEnum
 
 
 def checkIfLegStopLossHit(order: OrderDataType, currentCandle: CandleStickDataType) -> bool:

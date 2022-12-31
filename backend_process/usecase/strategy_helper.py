@@ -1,10 +1,10 @@
 
 
 from typing import Optional, Tuple
-from backend_process.model.candleStick import CandleStickDataType
-from backend_process.model.order import OrderDataType, OrderSideEnum
-from backend_process.model.strategy import ExitConditionDataSourceEnum, StrategyDataType
-from backend_process.model.trade import PnlDataType, TradeDataType, TradeDirectionTypeEnum, TradeOutputEnum, TradeStatusEnum
+from model.candleStick import CandleStickDataType
+from model.order import OrderDataType, OrderSideEnum
+from model.strategy import ExitConditionDataSourceEnum, StrategyDataType
+from model.trade import PnlDataType, TradeDataType, TradeDirectionTypeEnum, TradeOutputEnum, TradeStatusEnum
 from datetime import datetime
 import pandas as pd
 import plotly.express as px
@@ -57,6 +57,8 @@ def getOppositeOrderSide(entry_orders: list[OrderDataType], ticker: str):
 
 
 def updateProfitAndLoss(tradeData: TradeDataType, optionsCandleData: dict[str, CandleStickDataType]) -> TradeDataType:
+    tradeData.underlying_data.append(
+        optionsCandleData[tradeData.underlying_ticker].open)
     totalBuyPrice = 0.0
     totalSellPrice = 0.0
 

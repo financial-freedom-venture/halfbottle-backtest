@@ -1,12 +1,15 @@
+# import sys
+# sys.path.append("..")
+
 from datetime import datetime, timedelta
 from typing import Optional, Tuple
-from backend_process.model.baseModel import CustomBaseModel
-from backend_process.model.candleStick import ContractTypeEnum, ExpiryTypeEnum
-from backend_process.model.error import ErrorCodeEnum, ErrorResponse
+from model.baseModel import CustomBaseModel
+from model.candleStick import ContractTypeEnum, ExpiryTypeEnum
+from model.error import ErrorCodeEnum, ErrorResponse
 import pandas as pd
 from pathlib import Path
 
-from backend_process.model.singleton import Singleton
+from model.singleton import Singleton
 
 
 class AvailableOptionsExpiryData(CustomBaseModel):

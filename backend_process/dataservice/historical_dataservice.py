@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import Request
 import requests
 
-from backend_process.model.candleStick import CandleStickListDataType, ContractTypeEnum, ExpiryTypeEnum
+from model.candleStick import CandleStickListDataType, ContractTypeEnum, ExpiryTypeEnum
 
 
 DATA_PATH = "./data/weekly_data/"

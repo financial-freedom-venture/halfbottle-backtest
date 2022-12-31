@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 from typing import Optional
 from backend_process.dto.exitDto import TradeExitConditionResponseDTO, TradeExitResponseDataDTO, TradeExitTypeEnum
-from backend_process.model.candleStick import CandleStickDataType
-from backend_process.model.strategy import SpreadStoplossConditionTypeEnum, StrategyDataType
-from backend_process.model.trade import TradeDataType
+from model.candleStick import CandleStickDataType
+from model.strategy import SpreadStoplossConditionTypeEnum, StrategyDataType
+from model.trade import TradeDataType
 from backend_process.usecase.stoploss_conditions import checkIfLegStopLossHit, checkIfMTMStopLossHit, checkIfTakeProfitHit
 from backend_process.usecase.strategy_helper import getActiveTickers, getOrderData
 from backend_process.utils.strategyUtil import getSpreadOrderStrike

@@ -1,10 +1,10 @@
 
 
 from typing import Tuple
-from backend_process.model.candleStick import CandleStickDataType, CandleStickDictDataType
-from backend_process.model.order import OrderDataType, OrderSideEnum, OrderStatusType, OrderTypeEnum
-from backend_process.model.strategy import SpreadOrderDataType, SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
-from backend_process.model.trade import TradeDataType
+from model.candleStick import CandleStickDataType, CandleStickDictDataType
+from model.order import OrderDataType, OrderSideEnum, OrderStatusType, OrderTypeEnum
+from model.strategy import SpreadOrderDataType, SpreadStrikeDataType, SpreadStrikeTypeEnum, StrategyDataType
+from model.trade import TradeDataType
 from backend_process.usecase.strategy_helper import getActiveTickers, getActiveTickersWithQuantity, updateProfitAndLoss
 from backend_process.utils.strategyUtil import getLotSize, getSpreadOrderStrike
 

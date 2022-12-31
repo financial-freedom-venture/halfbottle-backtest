@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
-from typing import Optional, Any
-from backend.model.setting import Settings
-from backend.model.baseModel import CustomBaseModel
-from backend.model.strategy import StrategyDataType
-from backend.model.trade import TradeDataType, TradeOutputEnum, TradeReportDataType
+from typing import Optional, Any, Union
+from model.setting import Settings
+from model.baseModel import CustomBaseModel
+from model.strategy import StrategyDataType
+from model.trade import TradeDataType, TradeDetailedDataType, TradeOutputEnum, TradeReportDataType
 import requests
 import threading
 import time
@@ -12,7 +12,7 @@ import time
 class DistributedResponseType(CustomBaseModel):
     statusCode: int
     time: float
-    tradeData: Optional[TradeReportDataType]
+    tradeData: Optional[Union[TradeReportDataType, TradeDetailedDataType]]
     error: Optional[str]
 
 
@@ -59,6 +59,17 @@ class OptionsBacktestOrchestratorCrud:
         return self.settings.MAX_THREADS
 
     def testStrategy(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType) -> Optional[TradeReportDataType]:
+
+        start = time.time()
+        output: list[DistributedResponseType] = []
+
+        self.__processRequest(strategy, start_date, end_date, output)
+
+        end = time.time()
+
+        return self.clubTradeReport(output, end-start)
+
+    def testStrategyDistributed(self, start_date: datetime, end_date: datetime, strategy: StrategyDataType) -> Optional[TradeReportDataType]:
         max_threads = self.__getMaxThreads(start_date, end_date)
 
         start = time.time()
@@ -87,7 +98,7 @@ class OptionsBacktestOrchestratorCrud:
 
         return self.clubTradeReport(output, end-start, max_threads)
 
-    def clubTradeReport(self, tradeReports: list[DistributedResponseType], totalTime: float, max_threads: int) -> TradeReportDataType:
+    def clubTradeReport(self, tradeReports: list[DistributedResponseType], totalTime: float, max_threads: int = 1) -> TradeReportDataType:
         total_failed = 0
         average_time = 0.0
         max_time = 0
