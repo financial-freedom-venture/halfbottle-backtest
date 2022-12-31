@@ -3,10 +3,10 @@ import threading
 import requests
 import time
 
-MAX_THREADS = 50
+MAX_THREADS = 250
 
 START_DATE = datetime(2019, 1, 1)
-END_DATE = datetime(2019, 1, 1)
+END_DATE = datetime(2020, 12, 31)
 
 strategyJson = {
     "ticker": "CNXBAN",
@@ -57,7 +57,7 @@ if total_days < MAX_THREADS:
 DAYS_PER_THREAD = int(total_days/MAX_THREADS)
 
 
-URL = "http://localhost:8001/intraday/"
+URL = "https://backtest-process.halfbottle.in/intraday/"
 BODY = strategyJson
 
 
