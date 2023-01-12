@@ -23,12 +23,14 @@ def generateFiles(data: CandleStickListDataType, instrument: InstrumentTypeEnum)
 
 #   folder format CASH
 # data -> CASH -> TICKER -> YEAR -> DATE.json
+# key is 2 things
+#  - Ticker->>Date
 def __generateCashFiles(data: CandleStickListDataType) -> dict[str, CandleStickListDataType]:
     output: dict[str, CandleStickListDataType] = {}
     for entry in data.data:
         datetime_ist = datetime.fromisoformat(
             entry.iso_string) - timedelta(minutes=330)
-        key = str(datetime_ist.year) + "-" \
+        key = entry.ticker + "->>" + str(datetime_ist.year) + "-" \
             + str(datetime_ist.month) + "-" \
             + str(datetime_ist.day)
         if key in output.keys():
@@ -71,9 +73,8 @@ def __generateOptionsFiles(data: CandleStickListDataType) -> dict[str, CandleSti
 def __generateFuturesFiles(data: CandleStickListDataType, date: date) -> dict[str, CandleStickListDataType]:
     return
 
+
 # ---------------------------------- Write Functions ----------------------------------------#
-
-
 def writeFiles(data: dict[str, CandleStickListDataType], instrument: InstrumentTypeEnum) -> bool:
     if len(data) == 0:
         logging.warning('IciciDataService -++ writeFiles: Not data found')
@@ -86,14 +87,22 @@ def writeFiles(data: dict[str, CandleStickListDataType], instrument: InstrumentT
     return False
 
 
+# key can be 2 things
+# key is 2 things
+#  - Ticker->>Date
 def __writeCashFiles(data: dict[str, CandleStickListDataType]) -> bool:
     for key in data.keys():
-        directory = directoryPath + "CASH/" + \
-            data[key].data[0].ticker + "/"
+        ticker = key.split("->>")[0]
+        key = key.split("->>")[1]
+        directory = directoryPath + "CASH/" + ticker + "/"
+
         try:
             os.makedirs(directory)
         except FileExistsError:
             count = 1
+        
+        if data[key].data[0].ticker == "NIFTY":
+            print("test")
 
         if os.path.exists(directory + key + ".csv"):
             continue
