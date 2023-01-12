@@ -23,6 +23,7 @@ dist/
 target/
 dist/
 
+
 # JetBrains IDE
 .idea/
 
@@ -60,3 +61,7 @@ backtesting-report
 
 # oi data
 oi_data_cache.json
+
+# data files
+data/
+*.csv
