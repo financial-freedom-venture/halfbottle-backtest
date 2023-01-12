@@ -100,14 +100,11 @@ def __writeCashFiles(data: dict[str, CandleStickListDataType]) -> bool:
             os.makedirs(directory)
         except FileExistsError:
             count = 1
-        
-        if data[key].data[0].ticker == "NIFTY":
-            print("test")
 
         if os.path.exists(directory + key + ".csv"):
             continue
 
-        df = data[key].generatePandasDf()
+        df = data[ticker + "->>" + key].generatePandasDf()
         df.to_csv(directory + key + '.csv', sep=',')
         # with open(directory + key + '.json', 'w', encoding='utf-8') as f:
         #     json.dump(data[key].dict(), f, ensure_ascii=False, indent=4)
