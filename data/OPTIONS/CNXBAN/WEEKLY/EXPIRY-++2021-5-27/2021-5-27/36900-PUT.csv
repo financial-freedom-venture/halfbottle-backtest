@@ -1,4 +1,0 @@
-,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1622108040000,2338.55,2338.55,2338.55,2338.55,25,50,36900,weekly,2021-5-27T21:00:00.000,options,put
-1,1622109360000,2320.0,2320.0,2320.0,2320.0,25,50,36900,weekly,2021-5-27T21:00:00.000,options,put
-2,1622114820000,2087.75,2087.75,2087.75,2087.75,25,25,36900,weekly,2021-5-27T21:00:00.000,options,put

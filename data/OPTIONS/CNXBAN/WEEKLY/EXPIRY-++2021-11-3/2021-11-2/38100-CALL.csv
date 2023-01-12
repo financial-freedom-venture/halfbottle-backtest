@@ -1,3 +1,0 @@
-,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1635847380000,1741.65,1741.65,1741.65,1741.65,25,1725,38100,weekly,2021-11-3T21:00:00.000,options,call
-1,1635852480000,1845.65,1845.65,1845.65,1845.65,25,1725,38100,weekly,2021-11-3T21:00:00.000,options,call

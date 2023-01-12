@@ -1,3 +1,3 @@
 ,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1597240380000,340.0,385.05,340.0,385.05,75,,10950,weekly,2020-8-20T21:00:00.000,options,call
-1,1597243560000,385.05,385.05,374.25,374.25,75,,10950,weekly,2020-8-20T21:00:00.000,options,call
+0,1597220520000,340.0,385.05,340.0,385.05,75,,10950,weekly,2020-8-20T21:00:00.000,options,call
+1,1597223700000,385.05,385.05,374.25,374.25,75,,10950,weekly,2020-8-20T21:00:00.000,options,call
