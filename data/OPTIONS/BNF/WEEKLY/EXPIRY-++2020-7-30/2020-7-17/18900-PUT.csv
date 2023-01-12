@@ -1,4 +1,0 @@
-,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1594978860000,20.6,32.0,20.6,32.0,50,,18900,weekly,2020-7-30T21:00:00.000,options,put
-1,1594979820000,36.65,36.65,36.65,36.65,25,,18900,weekly,2020-7-30T21:00:00.000,options,put
-2,1594979880000,36.5,36.5,36.5,36.5,25,,18900,weekly,2020-7-30T21:00:00.000,options,put

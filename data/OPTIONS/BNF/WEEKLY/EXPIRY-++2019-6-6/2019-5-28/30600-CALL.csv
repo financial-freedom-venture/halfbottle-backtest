@@ -1,2 +1,0 @@
-,timestamp,open,high,low,close,volume,open_interest,strike,expiry_type,expiry,instrument,contract_type
-0,1559033640000,900.0,900.0,900.0,900.0,40,,30600,weekly,2019-6-6T21:00:00.000,options,call
